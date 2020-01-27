@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div>
+<table class=table>
+<tr><th>Name</th><th>age</th><th>image</th></tr>
+{% for i in data %}
+<tr><td>{{i.name}}</td><td>{{i.age}}</td><td>{{i.image}}</td><td><button class="delete" id="{{i.id}}"> delete </button></td><td><a> Edit </a></td></tr>
+{% endfor %}
+</table>
+</div>
+<script>
+$(function(){
+  var textbox = $('.table a[class="delete"]');
+  textbox.click(function(){
+    $.get('delete',{
+      'id': $(this).attr('id')
+    });
+    });
+  });
+
+</script>
+
+<div >
+<button type="button" class="addnew">Addnew</button>
+</div>
+
+
+<div class="container"  style="display:none">
+  <h2>form</h2>
+  <form action="/home/" method='get'>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+    </div>
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input type="number" class="form-control" id="age" placeholder="Enter Age" name="age">
+    </div>
+     <div class="form-group">
+      <label for="gender">Gender:</label>
+      <input type="text" class="form-control" id="gender" placeholder="Enter Gender" name="gender">
+    </div>
+    <div class="form-group">
+      <label for="file">file:</label>
+      <input type="file" class="form-control" id="file" name="file">
+    </div>
+    <button type="button" class="btn btn-default" id="submit" >Submit</button>
+  </form>
+</div>
+
+<script>
+$(document).ready(function(){
+$('.addnew').click(function(){
+  $('.container').show()
+});
+});
+</script>
+<script>
+$(document).ready(function(){
+  $('#submit').click(function(){
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", " ?name="+ $("#name").val() +"&age="+ $("#age").val() + "&gender="+ $("#gender").val()
+                    +"&file="+ $("#file").val(), true);
+    
+xmlhttp.send();
+ });
+});
+</script>
+
