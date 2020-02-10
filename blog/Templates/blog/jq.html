@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
+</head>
+<body>
+<p id="pp"> Nikhil Don Mananjay DADA</p>
+hello
+</body>
+<script>
+    $(document).ready(function(){
+         $("#pp").click(function(){
+            $(this).load("/Hello/5", function(responseTxt, statusTxt, xhr){
+                 if(statusTxt == "success")
+                     alert("External content loaded successfully!"+responseTxt);
+                  if(statusTxt == "error")
+                     alert("Error: " + xhr.status + ": " + xhr.statusText);
+             });
+           });
+
+    });
+</script>
+</html>
